@@ -1,6 +1,18 @@
 SUMMARY
 =======
 
-An expansion of my previous meter reading project at http://lodge.glasgownet.com/2007/01/09/electricity-meter/. It continues to use Adams work from http://offog.org/code/electricity.html to make the data available via /var/lib/meter, but this python script in turn makes it available over MQTT.
+An expansion of my previous meter reading project at http://lodge.glasgownet.com/2007/01/09/electricity-meter/.
 
+It continues to use Adams work from http://offog.org/code/electricity.html to make the data available via /var/lib/meter, but this python script in turn makes it available over MQTT.
+
+INSTALL
+=======
+
+mkdir /usr/local/mqtt-readmeter/ /etc/mqtt-readmeter/
+cd /usr/local/
+git clone git://github.com/kylegordon/mqtt-readmeter.git
+cp mqtt-readmeter.py /usr/local/mqtt-readmeter/
+cp mqtt-readmeter.init /etc/init.d/mqtt-readmeter
+update-rc.d mqtt-readmeter defaults
+/etc/init.d/mqtt-readmeter start
 
