@@ -1,0 +1,6 @@
+SUMMARY
+=======
+
+An expansion of my previous meter reading project at http://lodge.glasgownet.com/2007/01/09/electricity-meter/. It continues to use Adams work from http://offog.org/code/electricity.html to make the data available via /var/lib/meter, but this python script in turn makes it available over MQTT.
+
+
