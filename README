@@ -13,5 +13,6 @@ cd /usr/local/
 git clone git://github.com/kylegordon/mqtt-readmeter.git
 cp mqtt-readmeter.init /etc/init.d/mqtt-readmeter
 update-rc.d mqtt-readmeter defaults
+cp mqtt-readmeter.default /etc/default/mqtt-readmeter
 /etc/init.d/mqtt-readmeter start
 
