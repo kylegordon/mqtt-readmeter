@@ -11,7 +11,6 @@ INSTALL
 mkdir /usr/local/mqtt-readmeter/ /etc/mqtt-readmeter/
 cd /usr/local/
 git clone git://github.com/kylegordon/mqtt-readmeter.git
-cp mqtt-readmeter.py /usr/local/mqtt-readmeter/
 cp mqtt-readmeter.init /etc/init.d/mqtt-readmeter
 update-rc.d mqtt-readmeter defaults
 /etc/init.d/mqtt-readmeter start
