@@ -12,7 +12,7 @@ import socket
 
 MQTT_HOST="10.8.0.1"
 MQTT_PORT=1883
-MQTT_TOPIC="/raw/" + socket.getfqdn() + "/readmeter/watts"
+MQTT_TOPIC="/raw/" + socket.getfqdn() + "/electricitymeterpulsecounter/watts"
 LOGFILE='/var/log/mqtt-readmeter.log'
 DEBUG=0
 
