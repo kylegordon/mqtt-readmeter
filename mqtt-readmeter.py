@@ -66,4 +66,5 @@ while mqttc.loop() == 0:
 	watts = open('/var/lib/meter', 'r').read()
 	if watts != oldwatts:
 		mqttc.publish(MQTT_TOPIC, watts)
+		oldwatts = watts
 		pass
