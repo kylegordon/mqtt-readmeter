@@ -22,7 +22,7 @@ DEBUG = config.getboolean("global", "debug")
 LOGFILE = config.get("global", "logfile")
 METERSOURCE = config.get("global", "metersource")
 MQTT_HOST = config.get("global", "mqtt_host")
-MQTT_PORT = config.get("global", "mqtt_host")
+MQTT_PORT = config.getint("global", "mqtt_port")
 
 MQTT_TOPIC="/raw/" + socket.getfqdn() + config.get("global", "MQTT_SUBTOPIC")
 
