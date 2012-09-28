@@ -63,9 +63,30 @@ def connect():
 
     mqttc.subscribe(MQTT_TOPIC, 2)
 
-#define what happens after connection
-def on_connect(rc):
-	logging.info("Connected to broker")
+def on_connect(result_code):
+     """
+     Handle connections (or failures) to the broker.
+     """
+     ## FIXME - needs fleshing out http://mosquitto.org/documentation/python/
+     if result_code == 0:
+        logging.info("Connected to broker")
+        mqttc.publish("/status/" + socket.getfqdn(), "Online")
+     else:
+        logging.warning("Something went wrong")
+        cleanup()
+
+def on_disconnect(result_code):
+     """
+     Handle disconnections from the broker
+     """
+     if result_code == 0:
+        logging.info("Clean disconnection")
+     else:
+        logging.info("Unexpected disconnection! Reconnecting in 5 seconds")
+        logging.debug("Result code: %s", result_code)
+        time.sleep(5)
+        connect()
+        main_loop()
 
 #On recipt of a message print it
 def on_message(msg):
