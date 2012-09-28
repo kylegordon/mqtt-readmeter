@@ -15,12 +15,12 @@ import ConfigParser
 
 # Read the config file
 config = ConfigParser.RawConfigParser()
-config.read("/etc/mqtt-republisher/mqtt-republisher.cfg")
+config.read("/etc/mqtt-readmeter/mqtt-readmeter.cfg")
 
 # Use ConfigParser to pick out the settings
 DEBUG = config.getboolean("global", "debug")
 LOGFILE = config.get("global", "logfile")
-MAPFILE = config.get("global", "mapfile")
+METERSOURCE = config.get("global", "metersource")
 MQTT_HOST = config.get("global", "mqtt_host")
 MQTT_PORT = config.get("global", "mqtt_host")
 
@@ -100,7 +100,7 @@ def main_loop():
     """
     while mqttc.loop() == 0:
         logging.debug("Looping")
-        watts = open('/var/lib/meter', 'r').read()
+        watts = open(METERSOURCE, 'r').read()
         if watts != oldwatts:
             mqttc.publish(MQTT_TOPIC, watts)
             oldwatts = watts
