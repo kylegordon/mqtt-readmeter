@@ -32,9 +32,9 @@ mqttc = mosquitto.Mosquitto(client_id)
 oldwatts = "0"
 
 if DEBUG:
-    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
-else:
     logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
+else:
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
 
 logging.info('Starting mqtt-readmeter')
 logging.info('INFO MODE')
