@@ -88,28 +88,24 @@ def on_disconnect(result_code):
         connect()
         main_loop()
 
-#On recipt of a message print it
 def on_message(msg):
-	logging.debug("Received: " + msg.topic)
+    """
+    What to do once we receive a message
+    """
+    logging.debug("Received: " + msg.topic)
+
+def main_loop():
+    """
+    The main loop in which we stay connected to the broker
+    """
+    while mqttc.loop() == 0:
+        logging.debug("Looping")
+        watts = open('/var/lib/meter', 'r').read()
+        if watts != oldwatts:
+            mqttc.publish(MQTT_TOPIC, watts)
+            oldwatts = watts
 
 # Use the signal module to handle signals
 signal.signal(signal.SIGTERM, cleanup)
 signal.signal(signal.SIGINT, cleanup)
 
-#connect to broker
-mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
-
-#define the callbacks
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
-
-mqttc.subscribe(MQTT_TOPIC, 2)
-
-#remain connected and publish
-while mqttc.loop() == 0:
-	logging.debug("Looping")
-	watts = open('/var/lib/meter', 'r').read()
-	if watts != oldwatts:
-		mqttc.publish(MQTT_TOPIC, watts)
-		oldwatts = watts
-		pass
