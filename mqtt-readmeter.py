@@ -29,8 +29,6 @@ MQTT_TOPIC="/raw/" + socket.getfqdn() + config.get("global", "MQTT_SUBTOPIC")
 client_id = "Readmeter_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
-oldwatts = "0"
-
 if DEBUG:
     logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
 else:
@@ -98,6 +96,7 @@ def main_loop():
     """
     The main loop in which we stay connected to the broker
     """
+    oldwatts = ""
     while mqttc.loop() == 0:
         logging.debug("Looping")
         watts = open(METERSOURCE, 'r').read()
@@ -109,3 +108,6 @@ def main_loop():
 signal.signal(signal.SIGTERM, cleanup)
 signal.signal(signal.SIGINT, cleanup)
 
+# Connect to the broker and enter the main loop
+connect()
+main_loop()
