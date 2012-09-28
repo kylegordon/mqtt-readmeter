@@ -26,19 +26,15 @@ MQTT_PORT = config.get("global", "mqtt_host")
 
 MQTT_TOPIC="/raw/" + socket.getfqdn() + config.get("global", "MQTT_SUBTOPIC")
 
-mypid = os.getpid()
-client_uniq = "Readmeter_"+str(mypid)
-mqttc = mosquitto.Mosquitto(client_uniq)
+client_id = "Readmeter_%d" % os.getpid()
+mqttc = mosquitto.Mosquitto(client_id)
+
 oldwatts = "0"
 
-LEVELS = {'debug': logging.DEBUG,
-          'info': logging.INFO,
-          'warning': logging.WARNING,
-          'error': logging.ERROR,
-          'critical': logging.CRITICAL}
-
-if DEBUG == 0: logging.basicConfig(filename=LOGFILE,level=logging.INFO)
-if DEBUG == 1: logging.basicConfig(filename=LOGFILE,level=logging.DEBUG)
+if DEBUG:
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
+else:
+    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
 
 logging.info('Starting mqtt-readmeter')
 logging.info('INFO MODE')
