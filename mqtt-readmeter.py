@@ -91,6 +91,8 @@ def on_message(msg):
     What to do once we receive a message
     """
     logging.debug("Received: " + msg.topic)
+    if msg.topic == "/status" and msg.payload == "status?":
+        mqttc.publish("/status/" + socket.getfqdn(), "Online")
 
 def main_loop():
     """
