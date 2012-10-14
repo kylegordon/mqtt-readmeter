@@ -44,6 +44,7 @@ def cleanup(signum, frame):
      in the event of a SIGTERM or SIGINT.
      """
      logging.info("Disconnecting from broker")
+     # FIXME - This status topis too far up the hierarchy.
      mqttc.publish("/status/" + socket.getfqdn(), "Offline")
      mqttc.disconnect()
      logging.info("Exiting on signal %d", signum)
