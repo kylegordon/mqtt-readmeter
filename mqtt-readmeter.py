@@ -29,10 +29,12 @@ MQTT_TOPIC="/raw/" + socket.getfqdn() + config.get("global", "MQTT_SUBTOPIC")
 client_id = "Readmeter_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
+LOGFORMAT = '%(asctime)-15s %(message)s'
+
 if DEBUG:
-    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
+    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG, format=LOGFORMAT)
 else:
-    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO, format=LOGFORMAT)
 
 logging.info('Starting mqtt-readmeter')
 logging.info('INFO MODE')
