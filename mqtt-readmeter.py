@@ -112,6 +112,7 @@ def main_loop():
     while mqttc.loop() == 0:
         logging.debug("Looping")
         watts = open(METERSOURCE, 'r').read()
+	watts = watts.rstrip('\n')
         if watts != oldwatts:
             mqttc.publish(MQTT_TOPIC, watts)
             oldwatts = watts
